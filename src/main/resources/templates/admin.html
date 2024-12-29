@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>All users</title>
+</head>
+<body>
+
+<h1>Список пользователей</h1>
+
+<table border="3px" cellpadding="2">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Email</th>
+    <th>Роль</th>
+    <th>Изменить</th>
+    <th>Удалить</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${usersList}">
+    <td th:text="${user.getId()}"></td>
+    <td th:text="${user.getUsername()}"></td>
+    <td th:text="${user.getLastName()}"></td>
+    <td th:text="${user.getEmail()}"></td>
+    <td th:text="${user.getRoles()}"></td>
+    <td><a th:href="@{'/admin/edit?id=' + ${user.id}}">изменить</a></td>
+    <td><a th:href="@{'delete?id=' + ${user.id}}">удалить</a></td>
+  </tr>
+  </tbody>
+</table>
+
+<br/>
+<form  th:method = "GET" th:action="@{/admin/addNewUser}">
+  <input type="submit" value="Создать пользователя" />
+</form>
+
+<br/>
+<form  th:method = "GET" th:action="@{/logout}">
+  <input type="submit" value="Выход" />
+</form>
+
+</body>
+</html>
