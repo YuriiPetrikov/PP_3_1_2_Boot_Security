@@ -1,23 +1,23 @@
 package ru.kata.spring.boot_security.demo.service;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.dao.UserDaoImp;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImp implements UserDetailsService {
+public class UserServiceImp implements UserService {
 
     private final UserDaoImp userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
-    public UserServiceImp(UserDaoImp userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImp(UserDaoImp userRepository, PasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
@@ -33,45 +33,34 @@ public class UserServiceImp implements UserDetailsService {
         return user;
     }
 
-    public User findUserById(Long userId) {
+    @Override
+    public User findUserById(long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
     }
 
-    public List<User> allUsers() {
+    @Override
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    @Override
     public void updateUser(User user) {
-        userRepository.save(user);
-    }
-
-    public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
-
-        //редактирование существующего пользователя
-        if (userFromDB != null) {
-            user.setUsername(userFromDB.getUsername());
-            user.setLastName(userFromDB.getLastName());
-            user.setEmail(userFromDB.getEmail());
+        if(user != null) {
             userRepository.save(user);
-            return false;
         }
-
-        //создать нового пользователя
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setPassword(user.getPassword());
-        user.setRoles(user.getRoles());
-
-        userRepository.save(user);
-        return true;
     }
 
-    public boolean deleteUser(Long userId) {
+    @Override
+    public void saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(long userId) {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.deleteById(userId);
-            return true;
         }
-        return false;
     }
 }

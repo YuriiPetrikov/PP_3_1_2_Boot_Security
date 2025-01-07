@@ -31,10 +31,20 @@ public class User implements UserDetails {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User(long id, String username, String lastName, String email, String password, String passwordConfirm, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.passwordConfirm = passwordConfirm;
+        this.roles = roles;
     }
 
     public Long getId() {

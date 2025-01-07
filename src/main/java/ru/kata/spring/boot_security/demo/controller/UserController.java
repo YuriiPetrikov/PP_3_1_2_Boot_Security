@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String getUsers(Model model) {
-        model.addAttribute("usersList", userService.allUsers());
+        model.addAttribute("usersList", userService.getAllUsers());
         return "admin";
     }
 
@@ -41,13 +41,12 @@ public class UserController {
         if (!user.getPassword().equals(user.getPasswordConfirm())){
            return "/admin/addNewUser";
         }
-        if (!userService.saveUser(user)){
-            return "/admin/addNewUser";
-        }
+
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String deleteUser(@RequestParam("id") long id) {
         userService.deleteUser(id);
         return "redirect:/admin";

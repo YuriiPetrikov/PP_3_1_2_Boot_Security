@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
     <title>About the user</title>
 </head>
+
 <body>
-<h1>О пользователе</h1>
+    <h1>О пользователе</h1>
 
-<form th:action="@{/edit}" th:object="${user}" method="post">
-    <p><input type="hidden" th:field="*{id}" readonly/></p>
-    <p>Имя: <label>
-        <input type="text" th:field="*{username}" readonly/>
-    </label></p>
-    <p>Фамилия: <label>
-        <input type="text" th:field="*{lastName}" readonly/>
-    </label></p>
-    <p>Email: <label>
-        <input type="text" th:field="*{email}" readonly/>
-    </label></p>
-    <p>Роль: <label th:text="${user.getRoles()}"></label></p>
-</form>
+    <form th:action="@{/edit}" th:object="${user}" method="post">
+        <p><input type="hidden" th:field="*{id}" readonly/></p>
+        <p>Имя: <label>
+            <input type="text" th:field="*{username}" readonly/>
+        </label></p>
+        <p>Фамилия: <label>
+            <input type="text" th:field="*{lastName}" readonly/>
+        </label></p>
+        <p>Email: <label>
+            <input type="text" th:field="*{email}" readonly/>
+        </label></p>
+        <p>Роль: <label th:text="${user.getRoles()}"></label></p>
+    </form>
 
-<br/>
-<form  th:method = "GET" th:action="@{/logout}">
-    <input type="submit" value="Выход" />
-</form>
+    <br/>
+
+    <form  th:method = "GET" th:action="@{/logout}">
+        <input type="submit" value="Выход" />
+    </form>
 
 </body>
 </html>
