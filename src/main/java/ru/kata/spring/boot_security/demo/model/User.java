@@ -16,7 +16,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
 
     @Column(name = "lastName")
@@ -132,10 +132,18 @@ public class User implements UserDetails {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof User)) {
+            return false;
+        }
+
         User user = (User) o;
-        return Objects.equals(username, user.username) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(passwordConfirm, user.passwordConfirm) && Objects.equals(roles, user.roles);
+        return Objects.equals(username, user.username) && Objects.equals(lastName, user.lastName)
+                && Objects.equals(email, user.email) && Objects.equals(password, user.password)
+                && Objects.equals(passwordConfirm, user.passwordConfirm) && Objects.equals(roles, user.roles);
     }
 
     @Override

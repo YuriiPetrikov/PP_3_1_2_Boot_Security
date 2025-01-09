@@ -26,9 +26,10 @@
                 <option th:value="2" th:text="Admin"></option>
             </select>
         </p>
-        <p>
-            <input type="hidden" placeholder="Password" required th:field="*{password} "/>
-        </p>
+        </label></p>
+        <p>Password: <label>
+            <input type="text" th:field="*{password}"/>
+        </label></p>
         <p><input type="submit" value="Сохранить изменения"/></p>
     </form>
 

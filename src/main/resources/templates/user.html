@@ -20,6 +20,8 @@
             <input type="text" th:field="*{email}" readonly/>
         </label></p>
         <p>Роль: <label th:text="${user.getRoles()}"></label></p>
+        </label></p>
+        <p>Пароль: <label th:text="*{password}"></label></p>
     </form>
 
     <br/>
