@@ -10,27 +10,43 @@
     <h1>Изменить данные пользователя</h1>
 
     <form th:action="@{/admin/edit}" th:object="${user}" method="post">
-        <p><input type="hidden" th:field="*{id}"/></p>
-        <p>Имя: <label>
-            <input type="text" th:field="*{username}"/>
-        </label></p>
-        <p>Фамилия: <label>
-            <input type="text" th:field="*{lastName}"/>
-        </label></p>
-        <p>Email: <label>
-            <input type="text" th:field="*{email}"/>
-        </label></p>
-        <p>Роль:
-            <select th:field="*{roles}">
+        <p>
+            <input type="hidden" th:field="*{id}"/>
+        </p>
+        <p>
+            Имя:
+            <label>
+                <input type="text" th:field="*{username}"/>
+            </label>
+        </p>
+        <p>
+            Фамилия:
+            <label>
+                <input type="text" th:field="*{lastName}"/>
+            </label>
+        </p>
+        <p>
+            Email:
+            <label>
+                <input type="text" th:field="*{email}"/>
+            </label>
+        </p>
+        <p>
+            Роль:
+            <select size="2" multiple th:field="*{roles}">
                 <option th:value="1" th:text="User"></option>
                 <option th:value="2" th:text="Admin"></option>
             </select>
         </p>
-        </label></p>
-        <p>Password: <label>
-            <input type="text" th:field="*{password}"/>
-        </label></p>
-        <p><input type="submit" value="Сохранить изменения"/></p>
+        <p>
+            Password:
+            <label>
+                <input type="text" th:field="*{password}"/>
+            </label>
+        </p>
+        <p>
+            <input type="submit" value="Сохранить изменения"/>
+        </p>
     </form>
 
     <form  th:method = "GET" th:action="@{/admin}">
@@ -38,6 +54,7 @@
     </form>
 
     <br/>
+
     <form  th:method = "GET" th:action="@{/logout}">
         <input type="submit" value="Выход" />
     </form>

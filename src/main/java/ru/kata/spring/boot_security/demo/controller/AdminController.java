@@ -35,7 +35,6 @@ public class AdminController {
 
     @PostMapping("/admin/addNewUser")
     public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
             return "/admin/addNewUser";
         }

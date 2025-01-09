@@ -9,19 +9,35 @@
     <h1>О пользователе</h1>
 
     <form th:action="@{/edit}" th:object="${user}" method="post">
-        <p><input type="hidden" th:field="*{id}" readonly/></p>
-        <p>Имя: <label>
-            <input type="text" th:field="*{username}" readonly/>
-        </label></p>
-        <p>Фамилия: <label>
-            <input type="text" th:field="*{lastName}" readonly/>
-        </label></p>
-        <p>Email: <label>
-            <input type="text" th:field="*{email}" readonly/>
-        </label></p>
-        <p>Роль: <label th:text="${user.getRoles()}"></label></p>
-        </label></p>
-        <p>Пароль: <label th:text="*{password}"></label></p>
+        <p>
+            <input type="hidden" th:field="*{id}" readonly/>
+        </p>
+        <p>
+            Имя:
+            <label>
+                <input type="text" th:field="*{username}" readonly/>
+            </label>
+        </p>
+        <p>
+            Фамилия:
+            <label>
+                <input type="text" th:field="*{lastName}" readonly/>
+            </label>
+        </p>
+        <p>
+            Email:
+            <label>
+                <input type="text" th:field="*{email}" readonly/>
+            </label>
+        </p>
+        <p>
+            Роль:
+            <label th:text="${user.getRoles()}"></label>
+        </p>
+        <p>
+            Пароль:
+            <label th:text="*{password}"></label>
+        </p>
     </form>
 
     <br/>

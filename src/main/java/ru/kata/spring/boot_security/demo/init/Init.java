@@ -24,7 +24,6 @@ public class Init {
 
     @PostConstruct
     public void initNewUsers() {
-
         Role role1 = new Role(1L, "ROLE_USER");
         Role role2 = new Role(2L, "ROLE_ADMIN");
 
@@ -41,9 +40,12 @@ public class Init {
         Set<Role> roleAdmin = new HashSet<>();
         roleAdmin.add(role2);
 
-        User user1 = new User(1L, "admin", "adminov", "admin@mail.ru", "admin", "admin", roleAdminUser);
-        User user2 = new User(2L, "user", "userov", "user@mail.ru", "user", "user", roleUser);
-        User user3 = new User(3L, "user1", "user1ov", "user1@mail.ru", "user1", "user1", roleAdmin);
+        User user1 = new User(1L, "admin", "adminov", "admin@mail.ru",
+                "admin", "admin", roleAdminUser);
+        User user2 = new User(2L, "user", "userov", "user@mail.ru",
+                "user", "user", roleUser);
+        User user3 = new User(3L, "user1", "user1ov", "user1@mail.ru",
+                "user1", "user1", roleAdmin);
 
         userService.saveUser(user1);
         userService.saveUser(user2);
