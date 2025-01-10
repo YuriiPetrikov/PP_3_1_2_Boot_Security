@@ -23,32 +23,52 @@ public class Init {
     }
 
     @PostConstruct
-    public void initNewUsers() {
-        Role role1 = new Role(1L, "ROLE_USER");
-        Role role2 = new Role(2L, "ROLE_ADMIN");
+    public void initDB() {
+        addRoleToDB();
+        addAdminAndUserToDB();
+        addAdminToDB();
+        addUserToDB();
+    }
 
-        roleService.addRole(role1);
-        roleService.addRole(role2);
+    private void addRoleToDB() {
+        roleService.addRole(new Role(1L, "ROLE_USER"));
+        roleService.addRole(new Role(2L, "ROLE_ADMIN"));
+    }
 
+    private void addAdminAndUserToDB() {
+        User adminUser;
         Set<Role> roleAdminUser = new HashSet<>();
-        roleAdminUser.add(role1);
-        roleAdminUser.add(role2);
 
-        Set<Role> roleUser = new HashSet<>();
-        roleUser.add(role1);
+        roleAdminUser.add(new Role(1L, "ROLE_USER"));
+        roleAdminUser.add(new Role(2L, "ROLE_ADMIN"));
 
-        Set<Role> roleAdmin = new HashSet<>();
-        roleAdmin.add(role2);
-
-        User user1 = new User(1L, "admin", "adminov", "admin@mail.ru",
+        adminUser = new User(1L, "admin", "adminov", "admin@mail.ru",
                 "admin", "admin", roleAdminUser);
-        User user2 = new User(2L, "user", "userov", "user@mail.ru",
-                "user", "user", roleUser);
-        User user3 = new User(3L, "user1", "user1ov", "user1@mail.ru",
+
+        userService.saveUser(adminUser);
+    }
+
+    private void addAdminToDB() {
+        User admin;
+        Set<Role> roleAdmin = new HashSet<>();
+
+        roleAdmin.add(new Role(2L, "ROLE_ADMIN"));
+
+        admin = new User(2L, "user1", "user1ov", "user1@mail.ru",
                 "user1", "user1", roleAdmin);
 
-        userService.saveUser(user1);
-        userService.saveUser(user2);
-        userService.saveUser(user3);
+        userService.saveUser(admin);
+    }
+
+    private void addUserToDB() {
+        User user;
+        Set<Role> roleUser = new HashSet<>();
+
+        roleUser.add(new Role(1L, "ROLE_USER"));
+
+        user = new User(3L, "user", "userov", "user@mail.ru",
+                "user", "user", roleUser);
+
+        userService.saveUser(user);
     }
 }
